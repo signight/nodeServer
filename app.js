@@ -7,7 +7,7 @@ var bodyParser = require('body-parser'); //请求解析服务
 var session = require('express-session'); //https://github.com/expressjs/session, express-session是一个提供session服务的中间件，必须在 cookieParser 中间件后启用。
                                           //中文文档http://www.creatshare.com/%E3%80%90%E8%AF%91%E3%80%91express-session-%E4%B8%AD%E6%96%87%E6%96%87%E6%A1%A3.html
 var MongoStore = require('connect-mongo')(session);
-var flash = require('connect-flash');
+var flash = require('connect-flash');//flash 是一个在 session 中用于存储信息的特定区域。信息写入 flash ，下一次显示完毕后即被清除。典型的应用是结合重定向的功能
 var multer = require('multer'); //导入上传模块
 
 var routes = require('./routes/index'); //导入路由表
@@ -49,7 +49,7 @@ app.use(session({
     port: settings.port
   })
 }));
-app.use(flash());
+app.use(flash()); //启用flash功能
 routes(app); //路由控制器。     
 
 // 捕获404错误，并转发到错误处理器。
