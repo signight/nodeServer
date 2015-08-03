@@ -18,7 +18,7 @@ var app = express(); //实例化express服务
 // 模板设置
 app.set('views', path.join(__dirname, 'views')); //设置 views 文件夹为存放视图文件的目录, 即存放模板文件的地方,__dirname 为全局变量,存储当前正在执行的脚本所在的目录。
 app.set('view engine', 'ejs'); //设置视图模板引擎为 ejs。
-
+app.engine('html', require('ejs').__express);
 //引入中间件服务
 app.use(favicon(__dirname + '/public/favicon.ico')); //设置/public/favicon.ico为favicon图标。
 app.use(logger('dev')); //加载日志中间件。
@@ -33,6 +33,7 @@ app.use(multer({
     return filename;
   }
 }).array('file', 5));
+
 app.use(session({
   secret: settings.cookieSecret, //用它来对session cookie签名，防止篡改
   key: settings.db, //cookie的名字（原属性名为 key，新版属性名是name）
