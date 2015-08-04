@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser'); //cookie解析服务
 var bodyParser = require('body-parser'); //请求解析服务
 var session = require('express-session'); //https://github.com/expressjs/session, express-session是一个提供session服务的中间件，必须在 cookieParser 中间件后启用。
                                           //中文文档http://www.creatshare.com/%E3%80%90%E8%AF%91%E3%80%91express-session-%E4%B8%AD%E6%96%87%E6%96%87%E6%A1%A3.html
-var MongoStore = require('connect-mongo')(session);
+var MongoStore = require('connect-mongo')(session); //实现了将会化信息存储到mongoldb中。
 var flash = require('connect-flash');//flash 是一个在 session 中用于存储信息的特定区域。信息写入 flash ，下一次显示完毕后即被清除。典型的应用是结合重定向的功能
 var multer = require('multer'); //导入上传模块
 
@@ -18,7 +18,7 @@ var app = express(); //实例化express服务
 // 模板设置
 app.set('views', path.join(__dirname, 'views')); //设置 views 文件夹为存放视图文件的目录, 即存放模板文件的地方,__dirname 为全局变量,存储当前正在执行的脚本所在的目录。
 app.set('view engine', 'ejs'); //设置视图模板引擎为 ejs。
-app.engine('html', require('ejs').__express);
+
 //引入中间件服务
 app.use(favicon(__dirname + '/public/favicon.ico')); //设置/public/favicon.ico为favicon图标。
 app.use(logger('dev')); //加载日志中间件。
